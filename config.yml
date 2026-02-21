@@ -3,7 +3,8 @@ sections:
   about: true
   workExperience: true
   talks: true
-  writing: true
+  publication: true
+  blog: true
   socialLinks: true
 
 # Individual elements

@@ -8,7 +8,8 @@ const SiteConfigSchema = z.object({
     about: z.boolean(),
     workExperience: z.boolean(),
     talks: z.boolean(),
-    writing: z.boolean(),
+    publication: z.boolean(),
+    blog: z.boolean(),
     socialLinks: z.boolean(),
   }),
   elements: z.object({
@@ -26,7 +27,8 @@ const defaultConfig: SiteConfig = {
     about: true,
     workExperience: true,
     talks: true,
-    writing: true,
+    publication: true,
+    blog: true,
     socialLinks: true,
   },
   elements: {

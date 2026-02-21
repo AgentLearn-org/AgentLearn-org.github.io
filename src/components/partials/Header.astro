@@ -5,7 +5,8 @@ import { getSiteConfig } from '@/lib/config';
 const pathname = Astro.url.pathname;
 
 const isHomePage = pathname === '/';
-const isWritingPage = pathname.startsWith('/writing');
+const isPublicationPage = pathname.startsWith('/publication');
+const isBlogPage = pathname.startsWith('/blog');
 
 const config = getSiteConfig();
 ---
@@ -29,16 +30,29 @@ const config = getSiteConfig();
               ]}>Home</a
             >
           </li>
-          {config.sections.writing && (
+          {config.sections.publication && (
             <li>
               <a
-                href="/writing"
+                href="/publication"
                 class:list={[
                   'font-medium transition-colors block px-5 py-2',
                   'hover:text-headings',
-                  isWritingPage &&
+                  isPublicationPage &&
                     'text-headings bg-muted-foreground/40 rounded-full',
-                ]}>Writing</a
+                ]}>Publication</a
+              >
+            </li>
+          )}
+          {config.sections.blog && (
+            <li>
+              <a
+                href="/blog"
+                class:list={[
+                  'font-medium transition-colors block px-5 py-2',
+                  'hover:text-headings',
+                  isBlogPage &&
+                    'text-headings bg-muted-foreground/40 rounded-full',
+                ]}>Blog</a
               >
             </li>
           )}

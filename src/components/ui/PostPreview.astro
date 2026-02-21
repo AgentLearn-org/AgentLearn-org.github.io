@@ -15,7 +15,7 @@ const { remarkPluginFrontmatter } = await render(entry);
     <div class="relative min-w-22 shrink-0">
       <span class="text-muted-foreground text-sm">{formatDate(entry.data.date)}</span>
     </div>
-    <a href={`/writing/${entry.id}/`} class="flex flex-col gap-3">
+    <a href={`/blog/${entry.id}/`} class="flex flex-col gap-3">
       <div class="flex flex-col">
         <span class="text-headings font-medium">{entry.data.title}</span>
         <span class="text-muted-foreground">{remarkPluginFrontmatter.minutesRead}</span>

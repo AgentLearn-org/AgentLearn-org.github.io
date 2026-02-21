@@ -1,0 +1,29 @@
+---
+import { getEntry, render } from 'astro:content';
+import Author from '@/components/ui/Author.astro';
+import Container from '@/components/Container.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+
+const entry = await getEntry('pages', 'publication');
+
+if (!entry) {
+  throw new Error('Publication entry not found');
+}
+
+const { Content } = await render(entry);
+---
+
+<BaseLayout seo={entry.data.seo}>
+  <Container as="section" class="py-6">
+    <Author {...DEFAULT_CONFIGURATION.author} />
+  </Container>
+  <Container as="section" class="py-6">
+    <div class="flex flex-col gap-6">
+      <span class="text-headings">Publication</span>
+      <div class="prose dark:prose-invert">
+        <Content />
+      </div>
+    </div>
+  </Container>
+</BaseLayout>

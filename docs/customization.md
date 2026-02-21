@@ -12,7 +12,7 @@ Here’s an overview of folders relevant to customization:
 | `src/components/`        | UI and layout components (header, footer, etc.)           |
 | `src/content/`           | Editable content: jobs, links, posts, talks, pages        |
 | `src/layouts/`           | Astro layout templates                                    |
-| `src/pages/`             | Page routing (`index.astro`, `writing/`)                  |
+| `src/pages/`             | Page routing (`index.astro`, `publication/`, `blog/`)      |
 | `src/styles/global.css`  | Global CSS and utility styles                             |
 | `src/lib/`               | Utility functions and constants                           |
 
