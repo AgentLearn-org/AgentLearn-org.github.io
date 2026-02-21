@@ -29,7 +29,6 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
     avatar,
     name: 'Sunghwan Kim',
     headline: 'MS Student at Yonsei University',
-    pronouns: 'He/Him',
   },
   seo: {
     title: 'CV Folio — An Astro template inspired on Read.cv',
