@@ -34,8 +34,13 @@ const talks = await getCollection('talks');
 const sortedTalks = sortByYear(talks);
 
 const news = await getCollection('news');
+const extractNewsIndex = (title: string) => {
+  const match = title.match(/new_(\d+)/i);
+  return match ? Number(match[1]) : 0;
+};
+
 const sortedNews = news.sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  (a, b) => extractNewsIndex(b.data.title) - extractNewsIndex(a.data.title),
 );
 const latestNews = sortedNews.slice(0, 7);
 const extraNews = sortedNews.slice(7);

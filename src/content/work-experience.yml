@@ -1,14 +1,14 @@
 - title: "Engineering & Design"
   company: "Coderdiaz Studio"
   location: "Mexico City"
-  from: 2022
+  from: 2022-01
   url: "https://coderdiaz.com"
 
 - title: "Product Engineer"
   company: "Reboot Studio"
   location: "Mexico City"
-  from: 2022
-  to: 2022
+  from: 2022-02
+  to: 2022-11
   url: "https://reboot.studio"
   details: |
     I developed a new feature to display related products in Freshis blog posts.
@@ -25,8 +25,8 @@
 - title: "Product Engineer"
   company: "Sofia"
   location: "Mexico City"
-  from: 2025
-  to: 2025
+  from: 2025-01
+  to: 2025-12
   url: "https://sofiasalud.com"
   details:
     - "Build new features into the app using React Native and TypeScript."

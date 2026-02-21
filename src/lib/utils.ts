@@ -28,10 +28,10 @@ export const includeDraft = (draft: boolean) => {
  * - Items are sorted by end year descending, then by start year descending
  * - If end year is not present, current year is used for comparison
  */
-export const sortByDateRange = <T extends { from: number; to?: number }>(
+export const sortByDateRange = <T extends { from: Date; to?: Date }>(
   items: T[],
 ) => {
-  const getCurrentYear = () => new Date().getFullYear();
+  const getCurrentDate = () => new Date();
 
   return items.sort((current, next) => {
     // Prioritize ongoing jobs (no 'to' field) first
@@ -43,10 +43,19 @@ export const sortByDateRange = <T extends { from: number; to?: number }>(
     if (!currentIsOngoing && nextIsOngoing) return 1;
 
     // If both are ongoing or both have end dates, sort by end year then start year
-    const currentEnd = current.to ?? getCurrentYear();
-    const nextEnd = next.to ?? getCurrentYear();
-    return nextEnd - currentEnd || next.from - current.from;
+    const currentEnd = current.to ?? getCurrentDate();
+    const nextEnd = next.to ?? getCurrentDate();
+    return nextEnd.valueOf() - currentEnd.valueOf() || next.from.valueOf() - current.from.valueOf();
   });
+};
+
+export const formatMonthYear = (date: Date) => {
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    timeZone: 'UTC',
+  });
+  return formatter.format(date);
 };
 
 /*

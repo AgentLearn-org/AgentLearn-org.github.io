@@ -1,5 +1,6 @@
 ---
 import type { WorkExperienceEntry } from '@/lib/data';
+import { formatMonthYear } from '@/lib/utils';
 
 interface Props {
   entry: WorkExperienceEntry;
@@ -17,15 +18,15 @@ const images = entry.images
 <li class="py-0.5">
   <div class="flex gap-5">
     <div class="relative min-w-28 shrink-0">
-      <span class="text-muted-foreground text-sm"
-        >{entry.from} - {entry.to ?? 'Present'}</span
-      >
+      <span class="text-muted-foreground text-sm">
+        {formatMonthYear(entry.from)} - {entry.to ? formatMonthYear(entry.to) : 'Present'}
+      </span>
     </div>
     <div class="flex flex-col gap-3">
       <div class="flex flex-col">
-        <span class="text-headings font-medium">{entry.title}</span>
+        <span class="text-headings font-medium">{entry.company}</span>
         <span class="text-foreground text-sm">
-          {entry.company}
+          {entry.title}
           {entry.location && <span> · {entry.location}</span>}
         </span>
       </div>

@@ -20,7 +20,7 @@ const { entry } = Astro.props;
       <span class="text-foreground text-sm">{entry.authors}</span>
       <div class="flex flex-wrap items-center gap-3 text-sm">
         <a
-          class="text-headings font-medium hover:text-headings/80 transition-colors"
+          class="text-headings font-medium hover:text-headings/80 transition-colors inline-flex items-center gap-2 border border-border rounded-full px-3 py-1"
           rel="noopener noreferrer"
           target="_blank"
           href={entry.paperUrl}
@@ -29,7 +29,7 @@ const { entry } = Astro.props;
         </a>
         {entry.codeUrl && (
           <a
-            class="text-headings font-medium hover:text-headings/80 transition-colors"
+            class="text-headings font-medium hover:text-headings/80 transition-colors inline-flex items-center gap-2 border border-border rounded-full px-3 py-1"
             rel="noopener noreferrer"
             target="_blank"
             href={entry.codeUrl}

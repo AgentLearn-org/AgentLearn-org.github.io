@@ -22,8 +22,8 @@ const WorkExperienceSchema = z.object({
   title: z.string(),
   company: z.string(),
   location: z.string().optional(),
-  from: z.union([z.number(), z.string()]),
-  to: z.union([z.number(), z.string()]).optional(),
+  from: z.string(),
+  to: z.string().optional(),
   url: z.string().url().optional(),
   details: z.union([z.string(), z.array(z.string())]).optional(),
   images: z.array(z.string()).optional(),
@@ -33,8 +33,8 @@ export type WorkExperienceEntry = Omit<
   z.infer<typeof WorkExperienceSchema>,
   'from' | 'to'
 > & {
-  from: number;
-  to?: number;
+  from: Date;
+  to?: Date;
 };
 
 const loadYamlArray = (relativePath: string) => {
@@ -84,6 +84,12 @@ export const getPublications = (): Publication[] => {
   return publications.sort((a, b) => b.date.valueOf() - a.date.valueOf());
 };
 
+const parseYearMonth = (value: string) => {
+  const [year, month] = value.split('-').map((part) => Number(part));
+  if (!year || !month || month < 1 || month > 12) return null;
+  return new Date(Date.UTC(year, month - 1, 1));
+};
+
 export const getWorkExperience = (): WorkExperienceEntry[] => {
   const raw = loadYamlArray('src/content/work-experience.yml');
   const work: WorkExperienceEntry[] = [];
@@ -94,12 +100,12 @@ export const getWorkExperience = (): WorkExperienceEntry[] => {
       console.warn('Skipping invalid work entry', parsed.error.format());
       continue;
     }
-    const from = Number(parsed.data.from);
+    const from = parseYearMonth(parsed.data.from);
     const to =
-      parsed.data.to === undefined ? undefined : Number(parsed.data.to);
+      parsed.data.to === undefined ? undefined : parseYearMonth(parsed.data.to);
 
-    if (Number.isNaN(from) || (parsed.data.to !== undefined && Number.isNaN(to))) {
-      console.warn('Skipping work entry with invalid years', parsed.data.title);
+    if (!from || (parsed.data.to !== undefined && !to)) {
+      console.warn('Skipping work entry with invalid dates', parsed.data.title);
       continue;
     }
 
