@@ -10,7 +10,8 @@ type ContactLink = {
 };
 
 interface Props extends AuthorInfo {
-  email?: string;
+  emailLabel?: string;
+  emailUrl?: string;
   contactLinks?: ContactLink[];
 }
 const {
@@ -20,7 +21,8 @@ const {
   username,
   location,
   pronouns,
-  email,
+  emailLabel,
+  emailUrl,
   contactLinks = [],
 } = Astro.props;
 
@@ -43,18 +45,27 @@ const image = await getImage({ src: avatar, format: 'avif'});
       <h1 class="text-xl font-semibold text-headings leading-tight">{name}</h1>
       <p class="text-base text-foreground leading-tight">
         <span>
-          {headline} in {location}
+          {headline}
+          {location && (
+            <span>
+              {' '}in {location}
+            </span>
+          )}
         </span>
         {pronouns && (
           <span class="ml-1">
             {pronouns}
           </span>
         )}
-        {email && (
+        {emailLabel && (
           <span class="block text-muted-foreground">
-            <a class="hover:text-headings transition-colors" href={`mailto:${email}`}>
-              {email}
-            </a>
+            {emailUrl ? (
+              <a class="hover:text-headings transition-colors" href={emailUrl}>
+                {emailLabel}
+              </a>
+            ) : (
+              <span>{emailLabel}</span>
+            )}
           </span>
         )}
       </p>

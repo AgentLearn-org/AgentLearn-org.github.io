@@ -8,11 +8,23 @@ import PostPreview from '@/components/ui/PostPreview.astro';
 
 const entry = await getEntry('pages', 'blog');
 const posts = await getCollection('posts');
+const links = await getCollection('links');
+const emailLink = links.find(
+  (link) =>
+    link.data.label.toLowerCase() === 'email' ||
+    link.data.url.toLowerCase().startsWith('mailto:'),
+);
+const contactLinks = links.filter((link) => link !== emailLink);
 ---
 
 <BaseLayout seo={entry.data.seo}>
   <Container as='section' class='py-6'>
-    <Author {...DEFAULT_CONFIGURATION.author} />
+    <Author
+      {...DEFAULT_CONFIGURATION.author}
+      emailLabel={emailLink?.data.name}
+      emailUrl={emailLink?.data.url}
+      contactLinks={contactLinks.map((link) => link.data)}
+    />
   </Container>
   <Container as='section' class='py-6'>
     <div class="flex flex-col gap-6">

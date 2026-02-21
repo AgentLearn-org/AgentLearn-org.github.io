@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getEntry, getCollection, render } from 'astro:content';
 import Author from '@/components/ui/Author.astro';
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -15,16 +15,28 @@ if (!entry) {
 
 const { Content } = await render(entry);
 const publications = getPublications();
+const links = await getCollection('links');
+const emailLink = links.find(
+  (link) =>
+    link.data.label.toLowerCase() === 'email' ||
+    link.data.url.toLowerCase().startsWith('mailto:'),
+);
+const contactLinks = links.filter((link) => link !== emailLink);
 ---
 
 <BaseLayout seo={entry.data.seo}>
   <Container as="section" class="py-6">
-    <Author {...DEFAULT_CONFIGURATION.author} />
+    <Author
+      {...DEFAULT_CONFIGURATION.author}
+      emailLabel={emailLink?.data.name}
+      emailUrl={emailLink?.data.url}
+      contactLinks={contactLinks.map((link) => link.data)}
+    />
   </Container>
   <Container as="section" class="py-6">
     <div class="flex flex-col gap-6">
       <span class="text-headings">Publication</span>
-      <div class="prose dark:prose-invert">
+      <div class="prose max-w-none dark:prose-invert">
         <Content />
       </div>
       {publications.length > 0 && (
