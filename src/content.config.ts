@@ -77,10 +77,21 @@ const postCollection = defineCollection({
     }),
 });
 
+const newsCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/news' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    url: z.string().url().optional(),
+    source: z.string().optional(),
+  }),
+});
+
 export const collections = {
   pages: pageCollection,
   links: linkCollection,
   jobs: jobCollection,
   talks: talkCollection,
   posts: postCollection,
+  news: newsCollection,
 };

@@ -3,8 +3,26 @@ import { Image } from 'astro:assets';
 import { getImage } from 'astro:assets';
 import type { AuthorInfo } from '@/lib/constants';
 
-interface Props extends AuthorInfo {}
-const { avatar, name, headline, username, location, pronouns } = Astro.props;
+type ContactLink = {
+  label: string;
+  name: string;
+  url: string;
+};
+
+interface Props extends AuthorInfo {
+  email?: string;
+  contactLinks?: ContactLink[];
+}
+const {
+  avatar,
+  name,
+  headline,
+  username,
+  location,
+  pronouns,
+  email,
+  contactLinks = [],
+} = Astro.props;
 
 const image = await getImage({ src: avatar, format: 'avif'});
 ---
@@ -24,19 +42,39 @@ const image = await getImage({ src: avatar, format: 'avif'});
     <div class="flex flex-col gap-0.5">
       <h1 class="text-xl font-semibold text-headings leading-tight">{name}</h1>
       <p class="text-base text-foreground leading-tight">
-        {headline} in {' '}
         <span>
-          {location}
-        </span>,
+          {headline} in {location}
+        </span>
         {pronouns && (
-          <span>
+          <span class="ml-1">
             {pronouns}
+          </span>
+        )}
+        {email && (
+          <span class="block text-muted-foreground">
+            <a class="hover:text-headings transition-colors" href={`mailto:${email}`}>
+              {email}
+            </a>
           </span>
         )}
       </p>
     </div>
-    <span class="text-foreground text-sm bg-muted-foreground/40 px-2 py-1 rounded-full w-max leading-none">
-      {username}
-    </span>
+    <div class="flex flex-wrap items-center gap-2">
+      {username && (
+        <span class="text-foreground text-sm bg-muted-foreground/40 px-2 py-1 rounded-full w-max leading-none">
+          {username}
+        </span>
+      )}
+      {contactLinks.map((link) => (
+        <a
+          class="text-foreground text-sm bg-muted-foreground/40 px-2 py-1 rounded-full w-max leading-none transition-colors hover:text-headings"
+          href={link.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
   </div>
 </div>

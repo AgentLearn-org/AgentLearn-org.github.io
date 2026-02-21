@@ -3,6 +3,7 @@ sections:
   about: true
   workExperience: true
   talks: true
+  news: true
   publication: true
   blog: true
   socialLinks: true
