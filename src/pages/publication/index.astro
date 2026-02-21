@@ -4,6 +4,8 @@ import Author from '@/components/ui/Author.astro';
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+import PublicationItem from '@/components/ui/PublicationItem.astro';
+import { getPublications } from '@/lib/data';
 
 const entry = await getEntry('pages', 'publication');
 
@@ -12,6 +14,7 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
+const publications = getPublications();
 ---
 
 <BaseLayout seo={entry.data.seo}>
@@ -24,6 +27,13 @@ const { Content } = await render(entry);
       <div class="prose dark:prose-invert">
         <Content />
       </div>
+      {publications.length > 0 && (
+        <ul class="flex flex-col gap-8">
+          {publications.map((publication) => (
+            <PublicationItem entry={publication} />
+          ))}
+        </ul>
+      )}
     </div>
   </Container>
 </BaseLayout>

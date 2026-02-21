@@ -1,0 +1,8 @@
+- title: "Example Paper Title"
+  authors: "First Author, Second Author, Third Author"
+  date: 2024-10-01
+  conference: "NeurIPS 2024"
+  paperUrl: "https://example.com/paper"
+  codeUrl: "https://github.com/example/repo"
+  info: "Best Paper Honorable Mention"
+  selected: true

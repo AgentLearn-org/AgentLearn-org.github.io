@@ -41,20 +41,6 @@ const linkCollection = defineCollection({
   }),
 });
 
-const jobCollection = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/jobs' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      company: z.string(),
-      location: z.string(),
-      from: z.number(),
-      to: z.number().optional(), // optional if currently working
-      url: z.string(),
-      images: z.array(image()).optional(),
-    }),
-});
-
 const talkCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/talks' }),
   schema: z.object({
@@ -90,7 +76,6 @@ const newsCollection = defineCollection({
 export const collections = {
   pages: pageCollection,
   links: linkCollection,
-  jobs: jobCollection,
   talks: talkCollection,
   posts: postCollection,
   news: newsCollection,

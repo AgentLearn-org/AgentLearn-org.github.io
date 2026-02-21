@@ -1,17 +1,15 @@
 ---
-import { render, type CollectionEntry } from 'astro:content';
+import type { WorkExperienceEntry } from '@/lib/data';
 
 interface Props {
-  entry: CollectionEntry<'jobs'>;
+  entry: WorkExperienceEntry;
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
-
-const images = entry.data.images
-  ? entry.data.images.map((img) => ({
-      src: img.src,
-      alt: entry.data.title,
+const images = entry.images
+  ? entry.images.map((src) => ({
+      src,
+      alt: entry.title,
     }))
   : [];
 ---
@@ -20,17 +18,30 @@ const images = entry.data.images
   <div class="flex gap-5">
     <div class="relative min-w-28 shrink-0">
       <span class="text-muted-foreground text-sm"
-        >{entry.data.from} - {entry.data.to ?? 'Present'}</span
+        >{entry.from} - {entry.to ?? 'Present'}</span
       >
     </div>
     <div class="flex flex-col gap-3">
       <div class="flex flex-col">
-        <span class="text-headings font-medium">{entry.data.title}</span>
-        <span class="text-foreground text-sm">{entry.data.company}</span>
+        <span class="text-headings font-medium">{entry.title}</span>
+        <span class="text-foreground text-sm">
+          {entry.company}
+          {entry.location && <span> · {entry.location}</span>}
+        </span>
       </div>
-      <div class="prose dark:prose-invert prose-sm">
-        <Content />
-      </div>
+      {entry.details && (
+        <div class="prose dark:prose-invert prose-sm">
+          {Array.isArray(entry.details) ? (
+            <ul>
+              {entry.details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
+          ) : (
+            <p class="whitespace-pre-line">{entry.details}</p>
+          )}
+        </div>
+      )}
 
       {
         images.length > 0 && (

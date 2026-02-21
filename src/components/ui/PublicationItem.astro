@@ -1,0 +1,46 @@
+---
+import type { Publication } from '@/lib/data';
+
+interface Props {
+  entry: Publication;
+}
+
+const { entry } = Astro.props;
+---
+
+<li class="py-0.5">
+  <div class="flex gap-5">
+    <div class="relative min-w-28 shrink-0">
+      <span class="text-muted-foreground text-sm">
+        {entry.conference ?? 'Publication'}
+      </span>
+    </div>
+    <div class="flex flex-col gap-2">
+      <span class="text-headings font-medium">{entry.title}</span>
+      <span class="text-foreground text-sm">{entry.authors}</span>
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <a
+          class="text-headings font-medium hover:text-headings/80 transition-colors"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={entry.paperUrl}
+        >
+          Paper
+        </a>
+        {entry.codeUrl && (
+          <a
+            class="text-headings font-medium hover:text-headings/80 transition-colors"
+            rel="noopener noreferrer"
+            target="_blank"
+            href={entry.codeUrl}
+          >
+            Code
+          </a>
+        )}
+      </div>
+      {entry.info && (
+        <p class="text-muted-foreground text-sm">{entry.info}</p>
+      )}
+    </div>
+  </div>
+</li>
