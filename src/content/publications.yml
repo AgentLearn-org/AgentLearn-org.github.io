@@ -1,8 +1,79 @@
-- title: "Example Paper Title"
-  authors: "First Author, Second Author, Third Author"
-  date: 2024-10-01
-  conference: "NeurIPS 2024"
-  paperUrl: "https://example.com/paper"
-  codeUrl: "https://github.com/example/repo"
-  info: "Best Paper Honorable Mention"
+- title: "MEM1: Learning to Synergize Memory and Reasoning for Efficient Long-Horizon Agents"
+  authors: "Zijian Zhou and Ao Qu and Zhaoxuan Wu and *Sunghwan Kim* and Alok Prakash and Daniela Rus and Jinhua Zhao and Bryan Kian Hsiang Low and Paul Pu Liang"
+  date: 2025-06-18
+  conference: "ICLR 2026"
+  paperUrl: "https://arxiv.org/abs/2506.15841"
+  info: ""
+  selected: true
+
+- title: "Embodied Agents Meet Personalization: Exploring Memory Utilization for Personalized Assistance"
+  authors: "Taeyoon Kwon† and Dongwook Choi† and *Sunghwan Kim* and Hyojun Kim and Seungjun Moon and Beong-woo Kwak and Kuan-Hao Huang and Jinyoung Yeo"
+  date: 2025-05-22
+  conference: "ICLR 2026"
+  paperUrl: "https://arxiv.org/abs/2505.16348"
+  info: ""
+  selected: false
+
+- title: "Web-Shepherd: Advancing PRMs for Reinforcing Web Agents"
+  authors: "Hyungjoo Chae† and *Sunghwan Kim†* and Junhee Cho† and Seungone Kim and Seungjun Moon and Gyeom Hwangbo and Dongha Lim and Minjin Kim and Yeonjun Hwang and Minju Gwak and Dongwook Choi and Minseok Kang and Gwanhoon Im and ByeongUng Cho and Hyojun Kim and Jun Hee Han and Taeyoon Kwon and Minju Kim and Beong-woo Kwak and Dongjin Kang and Jinyoung Yeo"
+  date: 2025-05-21
+  conference: "NeuIPS 2025"
+  paperUrl: "https://arxiv.org/abs/2505.15277"
+  info: "Spotlight"
+  selected: true
+
+- title: "ToolHaystack: Stress-Testing Tool-Augmented Language Models in Realistic Long-Term Interactions"
+  authors: "Beong-woo Kwak and Minju Kim and Dongha Lim and Hyungjoo Chae and Dongjin Kang and *Sunghwan Kim* and Dongil Yang and Jinyoung Yeo"
+  date: 2025-05-20
+  conference: "EMNLP 2025 findings"
+  paperUrl: "https://arxiv.org/abs/2505.23662"
+  info: ""
+  selected: false
+
+- title: "LLM Meets Scene Graph: Can Large Language Models Understand and Generate Scene Graphs? A Benchmark and Empirical Study"
+  authors: "Dongil Yang and Minjin Kim and *Sunghwan Kim* and Beong-woo Kwak and Minjun Park and Jinseok Hong and Woontack Woo and Jinyoung Yeo"
+  date: 2025-05-20
+  conference: "ACL 2025"
+  paperUrl: "https://arxiv.org/abs/2505.19510"
+  info: ""
+  selected: false
+
+- title: "Rethinking Reward Model Evaluation Through the Lens of Reward Overoptimization"
+  authors: "*Sunghwan Kim†* and Dongjin Kang† and Taeyoon Kwon and Hyungjoo Chae and Dongha Lee and Jinyoung Yeo"
+  date: 2025-05-19
+  conference: "ACL 2025"
+  paperUrl: "https://arxiv.org/abs/2505.12763"
+  info: "Oral Presentation"
+  selected: true
+
+- title: "Web Agents with World Models: Learning and Leveraging Environment Dynamics in Web Navigation"
+  authors: "Hyungjoo Chae and Namyoung Kim and Kai Tzu-iunn Ong and Minju Gwak and Gwanwoo Song and Jihoon Kim and *Sunghwan Kim* and Dongha Lee and Jinyoung Yeo"
+  date: 2024-10-17
+  conference: "ICLR 2025"
+  paperUrl: "https://arxiv.org/abs/2410.13232"
+  info: ""
+  selected: false
+
+- title: "Cactus: Towards Psychological Counseling Conversations using Cognitive Behavioral Theory"
+  authors: "Suyeon Lee† and *Sunghwan Kim†* and Minju Kim† and Dongjin Kang and Dongil Yang and Harim Kim and Minseok Kang and Dayi Jung and Min Hee Kim and Seungbeen Lee and Kyoung-Mee Chung and Youngjae Yu and Dongha Lee and Jinyoung Yeo"
+  date: 2024-07-03
+  conference: "EMNLP 2024 Findings"
+  paperUrl: "https://arxiv.org/abs/2407.03103"
+  info: ""
+  selected: false
+
+- title: "Language Models as Compilers: Simulating Pseudocode Execution Improves Algorithmic Reasoning in Language Models"
+  authors: "Hyungjoo Chae and Yeonghyeon Kim and Seungone Kim and Kai Tzu-iunn Ong and Beong-woo Kwak and Moohyeon Kim and *Sunghwan Kim* and Taeyoon Kwon and Jiwan Chung and Youngjae Yu and Jinyoung Yeo"
+  date: 2024-04-03
+  conference: "EMNLP 2024"
+  paperUrl: "https://arxiv.org/abs/2404.02575"
+  info: ""
+  selected: false
+
+- title: "Can Large Language Models be Good Emotional Supporter? Mitigating Preference Bias on Emotional Support Conversation"
+  authors: "Dongjin Kang†, *Sunghwan Kim†*, Taeyoon Kwon, Seungjun Moon, Hyunsouk Cho, Youngjae Yu, Dongha Lee, Jinyoung Yeo"
+  date: 2024-02-20
+  conference: "ACL 2024"
+  paperUrl: "https://arxiv.org/abs/2402.13211"
+  info: "Outstanding Paper Award"
   selected: true

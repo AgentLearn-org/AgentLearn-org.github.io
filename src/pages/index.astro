@@ -34,16 +34,21 @@ const talks = await getCollection('talks');
 const sortedTalks = sortByYear(talks);
 
 const news = await getCollection('news');
-const extractNewsIndex = (title: string) => {
-  const match = title.match(/new_(\d+)/i);
-  return match ? Number(match[1]) : 0;
-};
+const splitBoldSegments = (value: string) =>
+  value.split('**').map((text, index) => ({
+    text,
+    bold: index % 2 === 1,
+  }));
 
-const sortedNews = news.sort(
-  (a, b) => extractNewsIndex(b.data.title) - extractNewsIndex(a.data.title),
+const sortedNews = [...news].sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
-const latestNews = sortedNews.slice(0, 7);
-const extraNews = sortedNews.slice(7);
+const sortedContactLinks = [...contactLinks].sort((a, b) => {
+  const aIsCv = a.data.label.toLowerCase() === 'cv' || a.data.url === '/cv';
+  const bIsCv = b.data.label.toLowerCase() === 'cv' || b.data.url === '/cv';
+  if (aIsCv === bIsCv) return 0;
+  return aIsCv ? -1 : 1;
+});
 
 const publications = getPublications();
 const selectedPublications = publications.filter((pub) => pub.selected);
@@ -58,7 +63,7 @@ const config = getSiteConfig();
         {...DEFAULT_CONFIGURATION.author}
         emailLabel={emailLink?.data.name}
         emailUrl={emailLink?.data.url}
-        contactLinks={contactLinks.map((link) => link.data)}
+        contactLinks={sortedContactLinks.map((link) => link.data)}
       />
     </Container>
   )}
@@ -67,9 +72,9 @@ const config = getSiteConfig();
     <Container as="section" class="py-6">
       <div class="flex flex-col gap-6">
         <div class="flex items-center">
-          <span class="text-headings text-xl font-semibold">About</span>
+          <span class="text-headings text-lg font-semibold">About</span>
         </div>
-        <div class="prose prose-lg max-w-none dark:prose-invert">
+        <div class="prose prose-base max-w-none dark:prose-invert">
           <Content />
         </div>
       </div>
@@ -79,69 +84,45 @@ const config = getSiteConfig();
     config.sections.news && (
       <Container as="section" class="py-8">
         <div class="flex flex-col gap-5">
-          <span class="text-headings text-xl font-semibold">News</span>
+          <span class="text-headings text-lg font-semibold">News</span>
           {sortedNews.length === 0 ? (
             <p class="text-muted-foreground">No news yet.</p>
           ) : (
-            <>
+            <div class="max-h-80 overflow-y-auto pr-2">
               <ul class="flex flex-col gap-3">
-                {latestNews.map((item) => (
+                {sortedNews.map((item) => (
                   <li class="py-0.5">
                     <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
-                      <span class="min-w-28 text-muted-foreground">
+                      <span class="min-w-28 text-muted-foreground text-xs font-semibold">
                         {formatDate(item.data.date)}
                       </span>
                       {item.data.url ? (
                         <a
-                          class="text-headings font-medium hover:text-headings/80 transition-colors"
+                          class="text-headings text-sm hover:text-headings/80 transition-colors"
                           rel="noopener noreferrer"
                           target="_blank"
                           href={item.data.url}
                         >
-                          {item.data.title}
+                          {splitBoldSegments(item.data.title).map((part) =>
+                            part.bold ? <strong>{part.text}</strong> : part.text,
+                          )}
                         </a>
                       ) : (
-                        <span class="text-headings font-medium">
-                          {item.data.title}
+                        <span class="text-headings text-sm">
+                          {splitBoldSegments(item.data.title).map((part) =>
+                            part.bold ? (
+                              <strong>{part.text}</strong>
+                            ) : (
+                              part.text
+                            ),
+                          )}
                         </span>
                       )}
                     </div>
                   </li>
                 ))}
               </ul>
-              {extraNews.length > 0 && (
-                <details class="mt-2">
-                  <summary class="cursor-pointer text-sm text-muted-foreground hover:text-headings transition-colors">
-                    Show more
-                  </summary>
-                  <ul class="flex flex-col gap-3 mt-4">
-                    {extraNews.map((item) => (
-                      <li class="py-0.5">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
-                          <span class="min-w-28 text-muted-foreground">
-                            {formatDate(item.data.date)}
-                          </span>
-                          {item.data.url ? (
-                            <a
-                              class="text-headings font-medium hover:text-headings/80 transition-colors"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                              href={item.data.url}
-                            >
-                              {item.data.title}
-                            </a>
-                          ) : (
-                            <span class="text-headings font-medium">
-                              {item.data.title}
-                            </span>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              )}
-            </>
+            </div>
           )}
         </div>
       </Container>

@@ -22,6 +22,12 @@ const emailLink = links.find(
     link.data.url.toLowerCase().startsWith('mailto:'),
 );
 const contactLinks = links.filter((link) => link !== emailLink);
+const sortedContactLinks = [...contactLinks].sort((a, b) => {
+  const aIsCv = a.data.label.toLowerCase() === 'cv' || a.data.url === '/cv';
+  const bIsCv = b.data.label.toLowerCase() === 'cv' || b.data.url === '/cv';
+  if (aIsCv === bIsCv) return 0;
+  return aIsCv ? -1 : 1;
+});
 ---
 
 <BaseLayout seo={entry.data.seo}>
@@ -30,7 +36,7 @@ const contactLinks = links.filter((link) => link !== emailLink);
       {...DEFAULT_CONFIGURATION.author}
       emailLabel={emailLink?.data.name}
       emailUrl={emailLink?.data.url}
-      contactLinks={contactLinks.map((link) => link.data)}
+      contactLinks={sortedContactLinks.map((link) => link.data)}
     />
   </Container>
   <Container as="section" class="py-6">
